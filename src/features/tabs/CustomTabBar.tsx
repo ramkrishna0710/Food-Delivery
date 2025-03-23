@@ -9,9 +9,12 @@ import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import { Colors, screenWidth } from '@unistyles/Constants'
 import ScalePress from '@components/ui/ScalePress'
 import { DeliveryTabIcon, DiningTabIcon, LiveTabIcon, ReorderyTabIcon } from './TabIcon'
+import { useAppSelector } from '@states/reduxHook'
 
 const CustomTabBar: FC<BottomTabBarProps> = props => {
-    const isVegMode = true;
+    // const isVegMode = true;
+    const isVegMode = useAppSelector(state => state.user.isVegMode)
+
     const { scrollY } = useSharedState();
     const { state, navigation } = props;
     const bottom = useSafeAreaInsets();
@@ -121,11 +124,11 @@ const CustomTabBar: FC<BottomTabBarProps> = props => {
                 />
 
                 <TouchableOpacity
-                activeOpacity={0.8}
-                style={styles.groceryLogoContainer}
-                onPress={() => {
-                    Alert.alert('Plaese like and subscribe')
-                }}
+                    activeOpacity={0.8}
+                    style={styles.groceryLogoContainer}
+                    onPress={() => {
+                        Alert.alert('Plaese like and subscribe')
+                    }}
                 >
                     <Image
                         source={require('@assets/icons/grocery.png')}

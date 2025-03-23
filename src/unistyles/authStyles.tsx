@@ -37,8 +37,8 @@ export const loginStyles = createStyleSheet(({ colors, device, border }) => ({
         width: '100%',
         height: device.height * 0.4,
         resizeMode: 'cover',
-        borderBottomEndRadius: 30,
-        borderBottomStartRadius: 30
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30
     },
     bottomContainer: {
         width: '100%',
@@ -58,8 +58,8 @@ export const loginStyles = createStyleSheet(({ colors, device, border }) => ({
         gap: 10,
         overflow: "hidden",
         width: '100%',
-        marginTop: 14,
-        marginBottom: 8
+        marginTop: 16,
+        marginBottom: 10
     },
     horizontalLine: {
         height: 1,

@@ -1,4 +1,4 @@
-import { View, Text, Image, Animated, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, Image, Animated, TouchableOpacity, ActivityIndicator, StatusBar } from 'react-native'
 import React, { FC, use, useEffect, useRef, useState } from 'react'
 import { useStyles } from 'react-native-unistyles'
 import { loginStyles } from '@unistyles/authStyles'
@@ -42,6 +42,7 @@ const LogInScreen: FC = () => {
 
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor={'transparent'} translucent/>
             <Image
                 source={require('@assets/images/login.png')}
                 style={styles.cover}

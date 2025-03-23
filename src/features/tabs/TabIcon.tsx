@@ -11,6 +11,7 @@ import { Colors } from "@unistyles/Constants"
 import { FC, memo } from "react"
 import { Image, TextStyle, View, ViewStyle } from "react-native"
 import { RFValue } from "react-native-responsive-fontsize"
+import { useAppSelector } from "@states/reduxHook"
 
 interface TabProps {
     name: string
@@ -63,7 +64,10 @@ const TabIcon: FC<TabProps> = memo(({ name }) => {
 })
 
 const TabIconFocused: FC<TabProps> = memo(({ name }) => {
-    const isVegMode = true
+
+    // const isVegMode = true
+    const isVegMode = useAppSelector(state => state.user.isVegMode)
+
     return (
         <View style={tabStyle}>
             <Image

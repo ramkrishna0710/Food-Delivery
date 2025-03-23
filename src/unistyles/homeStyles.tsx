@@ -6,7 +6,7 @@ import { Platform } from "react-native";
 export const homeStyles = createStyleSheet(({ colors, device, border }) => ({
     container: {
         flex: 1,
-        backgroundColor: colors.background
+        backgroundColor: colors.background,
     },
     topHidingContainer: {
         marginTop: isBannerHeight,
@@ -41,7 +41,7 @@ export const homeStyles = createStyleSheet(({ colors, device, border }) => ({
     lottie: {
         width: '100%',
         bottom: -1,
-        height: device.width,
+        height: device.width + 45,
     },
     rollingText: {
         opacity: 0.6,
