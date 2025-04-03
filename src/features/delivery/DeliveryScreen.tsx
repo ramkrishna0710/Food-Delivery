@@ -48,15 +48,15 @@ const DeliveryScreen: FC = () => {
 
   return (
     <View style={styles.container}>
-      <CustomStatusBar/>
+      <StatusBar backgroundColor={'transparent'} translucent />
       <View style={{ height: Platform.OS === 'android' ? insets.top : 0 }}>
         <Animated.View style={moveUpStyle}>
           <Animated.View style={moveUpStyleNotExtrapolate}>
-            <Graphics/>
+            <Graphics />
           </Animated.View>
 
-          <Animated.View style={[backgroundColorChanges, styles.topHeader]}>
-            <HeaderSection/>
+          <Animated.View style={[backgroundColorChanges, styles.topHeader, { marginTop: 25 }]}>
+            <HeaderSection />
           </Animated.View>
         </Animated.View>
 

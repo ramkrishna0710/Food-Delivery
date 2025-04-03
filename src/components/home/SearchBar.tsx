@@ -12,17 +12,25 @@ import { useAppDispatch, useAppSelector } from '@states/reduxHook';
 import { setVegMode } from '@states/reducers/userSlice';
 
 const searchItems: string[] = [
-    'Search "chai samosa"',
-    'Search "Cake"',
-    'Search "ice cream"',
-    'Search "pizza"',
-    'Search "Biriani"'
+    '"chai samosa"',
+    '"Cake"',
+    '"ice cream"',
+    '"pizza"',
+    '"Chicken Tikka"',
+    '"Chicken Curry"',
+    '"Chicken Biryani"',
+    '"Chicken Masala"',
+    '"Chicken Fried Rice"',
+    '"Chicken Pasta"',
+    '"Chicken Paneer"',
+    '"Chicken Bhuna"',
+    '"Chicken Tandoori"',
 ];
 
 const SearchBar: FC = () => {
 
     const dispatch = useAppDispatch()
-    const isVegMode = useAppSelector(state =>  state.user.isVegMode)
+    const isVegMode = useAppSelector(state => state.user.isVegMode)
     // const isVegMode = true;
     const { styles } = useStyles(homeStyles)
     const { scrollGlobal } = useSharedState()
@@ -48,6 +56,13 @@ const SearchBar: FC = () => {
                         color={isVegMode ? Colors.active : Colors.primary}
                         size={20}
                     />
+
+                    <CustomText
+                        fontSize={12}
+                        fontFamily='Okra-Medium'
+                        style={styles.rollingText}
+                    >  Search
+                    </CustomText>
 
                     <RollingContent
                         interval={3000}
@@ -83,10 +98,10 @@ const SearchBar: FC = () => {
                     style={styles.vegMode}
                     onPress={() => dispatch(setVegMode(!isVegMode))}
                 >
-                    <Animated.Text style={[styles.animatedText, textColorAnimation, {color: 'black'}]}>
+                    <Animated.Text style={[styles.animatedText, textColorAnimation, { color: 'black' }]}>
                         VEG
                     </Animated.Text>
-                    <Animated.Text style={[styles.animatedSubText, textColorAnimation, {color: 'black'}]}>
+                    <Animated.Text style={[styles.animatedSubText, textColorAnimation, { color: 'black' }]}>
                         MODE
                     </Animated.Text>
                     <Image
