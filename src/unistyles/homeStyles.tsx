@@ -41,7 +41,7 @@ export const homeStyles = createStyleSheet(({ colors, device, border }) => ({
     lottie: {
         width: '100%',
         bottom: -1,
-        height: device.width + 25,
+        height: device.width,
     },
     rollingText: {
         opacity: 0.6,

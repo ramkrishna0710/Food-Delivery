@@ -9,6 +9,7 @@ import Graphics from '@components/home/Graphics'
 import CustomStatusBar from '@components/CustomStatusBar'
 import HeaderSection from '@components/home/HeaderSection'
 import MainList from '@components/list/MainList'
+import { screenWidth } from '@unistyles/Constants'
 
 const DeliveryScreen: FC = () => {
 
@@ -49,19 +50,20 @@ const DeliveryScreen: FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'transparent'} translucent />
-      <View style={{ height: Platform.OS === 'android' ? insets.top : 0 }}>
+      {/* <View style={{ height: Platform.OS === 'android' ? insets.top : 0 }}> */}
+      <View>
         <Animated.View style={moveUpStyle}>
           <Animated.View style={moveUpStyleNotExtrapolate}>
             <Graphics />
           </Animated.View>
 
-          <Animated.View style={[backgroundColorChanges, styles.topHeader, { marginTop: 25 }]}>
+          <Animated.View style={[backgroundColorChanges, styles.topHeader, { marginTop: screenWidth * 0.09 }]}>
             <HeaderSection />
           </Animated.View>
         </Animated.View>
 
         <Animated.View style={moveUpStyle}>
-          {/* <MainList/> */}
+          <MainList />
         </Animated.View>
       </View>
     </View>

@@ -11,7 +11,7 @@ const LocationHeader: FC = () => {
 
     const { scrollGlobal } = useSharedState()
     const { styles } = useStyles(homeStyles)
-    const textColor = 'black'
+    const textColor = '#fff'
 
     const opacityFadingStyles = useAnimatedStyle(() => {
         const opacity = interpolate(scrollGlobal.value, [0, 80], [1, 0])

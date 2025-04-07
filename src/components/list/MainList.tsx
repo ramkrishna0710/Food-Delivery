@@ -7,6 +7,8 @@ import { restaurantStyles } from '@unistyles/restuarantStyles'
 import { useSharedState } from '@features/tabs/SharedContext'
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import BackToTopButton from '@components/ui/BackToTopButton'
+import { filtersOption } from '@utils/dummyData'
+import SoringAndFilters from '@components/home/SoringAndFilters'
 
 const sectionData = [
   { title: 'Explore', data: [{}], renderItem: () => <ExploreList /> },
@@ -71,12 +73,17 @@ const MainList: FC = () => {
   });
 
   const viewabilityConfig = {
-    viewAreaCoverPercentThreshold: 80
+    viewAreaCoveragePercentThreshold: 80
   }
+
+  interface ViewableItemsChangedParams {
+    viewableItems: Array<ViewToken>;
+    changed: Array<ViewToken>;
+  }  
 
   const onViewableItemsChanged = ({
     viewableItems,
-  }: { viewableItems: Array<ViewToken> }) => {
+  }: ViewableItemsChangedParams) => {
     const resturantVisible = viewableItems.some(
       item => item?.section?.title === 'Restuarents' && item?.isViewable,
     );
@@ -89,29 +96,29 @@ const MainList: FC = () => {
         <BackToTopButton onPress={handleScrollToTop} />
       </Animated.View>
       <SectionList
-        // overScrollMode='always'
-        // onScroll={handleScroll}
-        // ref={sectionListRef}
-        // scrollEventThrottle={16}
+        overScrollMode='always'
+        onScroll={handleScroll}
+        ref={sectionListRef}
+        scrollEventThrottle={16}
         sections={sectionData}
-      //   bounces={false}
-      //   nestedScrollEnabled
-      //   showsVerticalScrollIndicator={false}
-      //   keyExtractor={(item, index) => index.toString()}
-      //   contentContainerStyle={styles.listContainer}
-      //   stickySectionHeadersEnabled={true}
-      //   viewabilityConfig={viewabilityConfig}
-      //   onViewableItemsChanged={onViewableItemsChanged}
-      //   renderSectionHeader={({section}) => {
-      //     if(section.title !== 'Resturant') {
-      //       return null
-      //     }
-      //     return(
-      //       <Animated.View style={[isResturantVisible || isNearEnd ? styles.shadowBottom : null]}>
-      //         {/* <SoringAndFilters/> */}
-      //       </Animated.View>
-      //     )
-        // }}
+        bounces={false}
+        nestedScrollEnabled
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={styles.listContainer}
+        stickySectionHeadersEnabled={true}
+        viewabilityConfig={viewabilityConfig}
+        onViewableItemsChanged={onViewableItemsChanged}
+        renderSectionHeader={({section}) => {
+          if(section.title !== 'Resturants') {
+            return null
+          }
+          return(
+            <Animated.View style={[isResturantVisible || isNearEnd ? styles.shadowBottom : null]}>
+              <SoringAndFilters menuTitle="Sort" options={filtersOption}/>
+            </Animated.View>
+          )
+        }}
       />
     </>
   )
