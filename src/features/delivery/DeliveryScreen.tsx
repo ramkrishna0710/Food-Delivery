@@ -57,7 +57,7 @@ const DeliveryScreen: FC = () => {
             <Graphics />
           </Animated.View>
 
-          <Animated.View style={[backgroundColorChanges, styles.topHeader, { marginTop: screenWidth * 0.09 }]}>
+          <Animated.View style={[backgroundColorChanges, styles.topHeader, { marginTop: Platform.OS === 'android' ? screenWidth * 0.07 : 0 }]}>
             <HeaderSection />
           </Animated.View>
         </Animated.View>

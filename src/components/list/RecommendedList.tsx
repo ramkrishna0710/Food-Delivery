@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import React from 'react'
 import { useStyles } from 'react-native-unistyles'
 import { cardStyles } from '@unistyles/cardStyles'
@@ -6,6 +6,8 @@ import ScalePress from '@components/ui/ScalePress'
 import { navigate } from '@utils/NavigationUtils'
 import CustomText from '@components/global/CustomText'
 import { Colors } from '@unistyles/Constants'
+import CustomGradient from '@components/global/CustomGradient'
+import { recommendedListData } from '@utils/dummyData'
 
 const RecommendedList = () => {
 
@@ -55,14 +57,49 @@ const RecommendedList = () => {
                             source={require('@assets/icons/bookmark.png')}
                         />
                     </TouchableOpacity>
+
+                    <CustomGradient position='bottom' />
+                </View>
+
+                <View style={styles.itemInfo}>
+                    <CustomText
+                        fontSize={10}
+                        fontFamily='Okra-Medium'
+                        color={Colors.text}
+                        numberOfLines={1}>
+                        {item?.name}
+                    </CustomText>
+                    <View>
+                        <Image
+                            source={require('@assets/icons/clock.png')}
+                            style={styles.clockIcon}
+                        />
+                        <CustomText
+                            fontFamily='Okra-Medium'
+                            color={Colors.lightText}
+                            fontSize={9}
+                            numberOfLines={1}>
+                            {`${item.time} . ${item?.distance}`}
+                        </CustomText>
+                    </View>
                 </View>
             </ScalePress>
         )
     }
     return (
-        <View>
-            <Text>RecommendedList</Text>
-        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <FlatList
+                numColumns={Math.ceil(recommendedListData?.length / 2)}
+                data={recommendedListData}
+                renderItem={renderItem}
+                scrollEnabled={false}
+                keyExtractor={item => item?.id?.toString()}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.listContainer}
+                style={styles.recommendedContainer}
+            />
+        </ScrollView>
+
     )
 }
 

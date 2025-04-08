@@ -1,4 +1,4 @@
-import { View, Text, ViewStyle } from 'react-native'
+import { ViewStyle } from 'react-native'
 import React, { FC } from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -16,9 +16,9 @@ const lightColors = [
 ]
 
 interface CustomGradientProps {
-    position: 'top'|'bottom';
+    position: 'top' | 'bottom';
     mode?: 'dark' | 'light';
-    style: ViewStyle
+    style?: ViewStyle
 }
 
 const CustomGradient: FC<CustomGradientProps> = ({
@@ -40,8 +40,8 @@ const CustomGradient: FC<CustomGradientProps> = ({
     }
     return (
         <LinearGradient
-        colors={position === 'top' ? lightColors : bottomColors }
-        style={[gradientStyles, style]}/>
+            colors={position === 'top' ? lightColors : bottomColors}
+            style={[gradientStyles, style]} />
     )
 }
 

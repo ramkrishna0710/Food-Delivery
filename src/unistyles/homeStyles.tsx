@@ -32,7 +32,7 @@ export const homeStyles = createStyleSheet(({ colors, device, border }) => ({
     lottieContainer: {
         width: device.width,
         backgroundColor: colors.primary,
-        height: Platform.OS === 'android' ? device.height * 0.54 : device.height * 0.6,
+        height: Platform.OS === 'android' ? device.height * 0.58 : device.height * 0.6,
         justifyContent: "flex-end",
         position: "absolute",
         zIndex: -3,
