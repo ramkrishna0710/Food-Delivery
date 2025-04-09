@@ -41,7 +41,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
                 item={item}
                 onOpenAddModal={openAddModal}
                 onClose={() => modalRef.current?.closeModal()}
-                resturant={resturant}
+                restaurant={resturant}
             />
         )
     }
@@ -51,7 +51,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
             <RemoveItemModal
                 item={item}
                 onClose={() => modalRef.current?.closeModal()}
-                resturant={resturant}
+                restaurant={resturant}
             />
         )
     }

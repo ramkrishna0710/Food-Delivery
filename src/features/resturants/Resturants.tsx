@@ -1,5 +1,5 @@
-import { View, Text, Platform, FlatList } from 'react-native'
-import React, { FC } from 'react'
+import { View, Text, Platform, FlatList, Animated } from 'react-native'
+import React, { FC, useRef, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import { useStyles } from 'react-native-unistyles';
 import { restaurantHeaderStyles } from '@unistyles/restuarantStyles';
@@ -11,6 +11,7 @@ import ResturantHeader from '@components/resturant/ResturantHeader';
 import DottedLine from '@components/ui/DottedLine';
 import FoodCard from './FoodCard';
 import CustomStatusBar from '@components/statusbar/CustomStatusBar';
+import SearchAndOffers from '@components/resturant/SearchAndOffers';
 
 const ResturantScreen: FC = () => {
 
@@ -52,6 +53,8 @@ const ResturantScreen: FC = () => {
           )}
           contentContainerStyle={styles.scrollContainer}
         />
+
+        <SearchAndOffers item={resturant} />
       </CustomSafeAreaView>
     </>
   )

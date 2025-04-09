@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useAppDispatch } from '@states/reduxHook';
 import { useStyles } from 'react-native-unistyles';
 import { modelStyles } from '@unistyles/modelStyles';
-import { addCustomizableItem } from '@states/reducers/cartSlice';
+import { addCustomizableItem, updateCustomizableItem } from '@states/reducers/cartSlice';
 import CustomText from '@components/global/CustomText';
 import Icon from '@components/global/Icon';
 import { Colors } from '@unistyles/Constants';
@@ -33,31 +33,34 @@ function transformSelectedOptions(
     })
 }
 
-const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
+const EditItemModal: FC<{ item: any; restaurant: any; onClose: () => void; cus: any; }> = ({
     item,
-    resturant,
-    onClose
+    restaurant,
+    onClose,
+    cus
 }) => {
 
     const dispatch = useAppDispatch()
     const { styles } = useStyles(modelStyles)
     const [data, setData] = useState({
-        quantity: 1,
-        price: item?.price,
+        quantity: cus?.quantity,
+        price: cus?.cartPrice,
         selectedOption: {} as Record<string, number>
     });
 
     useEffect(() => {
         const defaultSelectionOption: Record<string, number> = {}
-        let initialPrice = item?.price || 0
-        item?.customizationOptions?.forEach((customization: any) => {
-            if (customization?.required) {
-                const defaultOptionIndex = customization?.options?.findIndex(
-                    (options: any) => options?.price === 0
-                );
-                if (defaultOptionIndex !== -1) {
-                    defaultSelectionOption[customization.type] = defaultOptionIndex
-                    initialPrice += customization?.options[defaultOptionIndex]?.price || 0;
+
+        cus?.customizationOptions?.forEach((cusOption: any) => {
+            const itemCustomization = item?.customizationOptions?.find(
+                (option: any) => option.type == cusOption?.type
+            )
+            if (itemCustomization) {
+                const selectedIndex = itemCustomization?.options?.findIndex(
+                    (option: any) => option?.name === cusOption?.selectedOption?.name
+                )
+                if (selectedIndex !== -1) {
+                    defaultSelectionOption[cusOption?.type] = selectedIndex
                 }
             }
         });
@@ -65,10 +68,9 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
         setData(prevData => ({
             ...prevData,
             selectedOption: defaultSelectionOption,
-            price: initialPrice
         }));
 
-    }, [item])
+    }, [item, cus])
 
     const calculatePrice = (
         quantity: number,
@@ -102,15 +104,11 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
     }
 
     const addCartHandler = () => {
-        if (data?.quantity > 1) {
-            setData(prevData => ({
-                ...prevData,
-                quantity: prevData?.quantity + 1,
-                price: calculatePrice(prevData?.quantity + 1, prevData?.selectedOption),
-            }));
-        } else {
-            onClose()
-        }
+        setData(prevData => ({
+            ...prevData,
+            quantity: prevData?.quantity + 1,
+            price: calculatePrice(prevData?.quantity + 1, prevData?.selectedOption),
+        }))
     }
 
     const removeCartHandler = () => {
@@ -120,25 +118,28 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
                 quantity: prevData?.quantity - 1,
                 price: calculatePrice(prevData?.quantity - 1, prevData?.selectedOption),
             }));
+        } else {
+            onClose();
         }
     }
 
-    const addItemIntoCart = async () => {
+    const updateItemIntoCart = async () => {
         const customizaionOptions = transformSelectedOptions(
             data?.selectedOption,
             item?.customizationOptions,
         ).sort((a, b) => a.type.localeCompare(b.type))
 
         const customizedData = {
-            resturant: resturant,
-            item: item,
-            customization: {
+            restaurant_id: restaurant?.id,
+            itemId: item?.id,
+            customizationId: cus?.id,
+            newCustomization: {
                 quantity: data?.quantity,
                 price: data?.price,
-                customizationOptions: customizaionOptions,
+                customiztaionOptions: customizaionOptions,
             }
         }
-        dispatch(addCustomizableItem(customizedData))
+        dispatch(updateCustomizableItem(customizedData))
         onClose()
     }
 
@@ -147,9 +148,14 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
             <View style={styles.headerContainer}>
                 <View style={styles.flexRowGap}>
                     <Image source={{ uri: item?.image }} style={styles.headerImage} />
-                    <CustomText fontFamily='Okra-Medium' fontSize={12}>
-                        {item?.name}
-                    </CustomText>
+                    <View>
+                        <CustomText fontFamily='Okra-Medium' fontSize={12}>
+                            {item?.name}
+                        </CustomText>
+                        <CustomText fontFamily='Okra-Medium' fontSize={9}>
+                            Edit
+                        </CustomText>
+                    </View>
                 </View>
 
                 <View style={styles.flexRowGap}>
@@ -255,9 +261,9 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
 
                 <TouchableOpacity
                     style={styles.addButtonContainer}
-                    onPress={addItemIntoCart}>
+                    onPress={updateItemIntoCart}>
                     <CustomText color='#fff' fontFamily='Okra-Medium' varient='h5'>
-                        Add item - ₹{data?.price}
+                        Update item - ₹{data?.price}
                     </CustomText>
                 </TouchableOpacity>
                 <SafeAreaView />
@@ -266,6 +272,4 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
     )
 }
 
-export default AddItemModal
-
-const styles = StyleSheet.create({})
+export default EditItemModal
