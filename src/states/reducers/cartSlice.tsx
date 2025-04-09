@@ -276,19 +276,19 @@ export const cartSlice = createSlice({
             if (!item || !item.customizations) return;
 
             const matchingCustomizationIndex = item?.customizations?.findIndex(
-                (cust: any) =>
+                (cust:any) => 
                     cust?.id !== customizationId && JSON.stringify(cust.customizaionOptions) ===
-                    JSON.stringify(newCustomization.customizaionOptions)
+                JSON.stringify(newCustomization.customizaionOptions)
             )
 
             const targetCustomizationIndex = item?.customizations?.findIndex(
                 cust => cust.id === customizationId
             );
-            if (targetCustomizationIndex === -1) return;
+            if(targetCustomizationIndex === -1) return;
 
             const targetCustomization = item?.customizations[targetCustomizationIndex]
 
-            if (matchingCustomizationIndex !== -1) {
+            if(matchingCustomizationIndex !== -1 ) {
                 const matchingCustomization = item.customizations[matchingCustomizationIndex]
 
                 matchingCustomization.quantity += newCustomization?.quantity;
@@ -308,7 +308,7 @@ export const cartSlice = createSlice({
                 0
             )
             item.cartPrice = item?.customizations?.reduce(
-                (sum, cust) => sum + cust.cartPrice,
+                (sum, cust) => sum +  cust.cartPrice,
                 0
             )
 
