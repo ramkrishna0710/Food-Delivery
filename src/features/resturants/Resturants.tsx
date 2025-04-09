@@ -10,6 +10,7 @@ import { restaurantItemsData, restaurantsItemfiltersOption } from '@utils/dummyD
 import ResturantHeader from '@components/resturant/ResturantHeader';
 import DottedLine from '@components/ui/DottedLine';
 import FoodCard from './FoodCard';
+import CustomStatusBar from '@components/statusbar/CustomStatusBar';
 
 const ResturantScreen: FC = () => {
 
@@ -18,14 +19,15 @@ const ResturantScreen: FC = () => {
   const { styles } = useStyles(restaurantHeaderStyles)
   const insets = useSafeAreaInsets()
 
-  const renderItem = ({item}:any) => {
-    return(
-      <FoodCard item={item} resturant={resturant}/>
+  const renderItem = ({ item }: any) => {
+    return (
+      <FoodCard item={item} resturant={resturant} />
     )
   }
 
   return (
     <>
+      <CustomStatusBar />
       <View style={{ height: Platform.OS === 'android' ? insets.top : 0 }} />
       <CustomSafeAreaView>
 

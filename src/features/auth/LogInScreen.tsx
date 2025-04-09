@@ -8,6 +8,7 @@ import PhoneInput from '@components/ui/PhoneInput'
 import { resetAndNavigate } from '@utils/NavigationUtils'
 import SocialLogin from '@components/ui/SocialLogin'
 import useKeyboardOffsetHeight from '@utils/useKeyboardOffsetHeight'
+import CustomStatusBar from '@components/statusbar/CustomStatusBar'
 
 const LogInScreen: FC = () => {
     const animatedValue = useRef(new Animated.Value(0)).current
@@ -17,7 +18,7 @@ const LogInScreen: FC = () => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if(keyboardOffsetHeight == 0 ) {
+        if (keyboardOffsetHeight == 0) {
             Animated.timing(animatedValue, {
                 toValue: 0,
                 duration: 500,
@@ -30,7 +31,7 @@ const LogInScreen: FC = () => {
                 useNativeDriver: true
             }).start()
         }
-    },[keyboardOffsetHeight])
+    }, [keyboardOffsetHeight])
 
     const handleLogin = async () => {
         setLoading(true)
@@ -42,7 +43,7 @@ const LogInScreen: FC = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor={'transparent'} translucent/>
+            <CustomStatusBar />
             <Image
                 source={require('@assets/images/login.png')}
                 style={styles.cover}
@@ -51,7 +52,7 @@ const LogInScreen: FC = () => {
                 bounces={false}
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode="on-drag"
-                style={{ transform: [{ translateY: animatedValue }]}}
+                style={{ transform: [{ translateY: animatedValue }] }}
                 contentContainerStyle={styles.bottomContainer}
             >
                 <CustomText fontFamily='Okra-Bold' varient='h3' style={styles.title}>
@@ -85,7 +86,7 @@ const LogInScreen: FC = () => {
 
                 <BreakerText text='or' />
 
-                <SocialLogin/>
+                <SocialLogin />
 
             </Animated.ScrollView>
 

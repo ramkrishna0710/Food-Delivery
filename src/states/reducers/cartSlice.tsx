@@ -108,14 +108,14 @@ export const cartSlice = createSlice({
             action: PayloadAction<{
                 resturant: ResturantDeltails,
                 item: CartItem,
-                costomization: {
+                customization: {
                     quantity: number;
                     price: number;
                     customizationOptions: any[]
                 };
             }>
         ) => {
-            const { resturant, item, costomization } = action.payload;
+            const { resturant, item, customization: customization } = action.payload;
             const existingRestaurantCart = state.carts.find(
                 cart => cart.resturant.id === resturant.id
             );
@@ -132,7 +132,7 @@ export const cartSlice = createSlice({
                         existingItem?.cusomizations?.findIndex(
                             (cust: any) =>
                                 JSON.stringify(cust.customizationOptions) ===
-                                JSON.stringify(costomization.customizationOptions)
+                                JSON.stringify(customization.customizationOptions)
                         )
 
                     if (
@@ -141,35 +141,35 @@ export const cartSlice = createSlice({
                     ) {
                         const existingCustomization =
                             existingItem?.customizations[existingCustomizationIndex];
-                        existingCustomization.quantity += costomization?.quantity;
-                        existingCustomization.cartPrice += costomization?.price;
+                        existingCustomization.quantity += customization?.quantity;
+                        existingCustomization.cartPrice += customization?.price;
                     } else {
                         const newCustomizationId = uuid();
                         existingItem?.customizations?.push({
                             id: newCustomizationId,
-                            ...costomization,
-                            quantity: costomization?.quantity,
-                            cartPrice: costomization?.price,
-                            price: costomization?.price / costomization?.quantity
+                            ...customization,
+                            quantity: customization?.quantity,
+                            cartPrice: customization?.price,
+                            price: customization?.price / customization?.quantity
                         })
                     }
 
-                    existingItem.quantity += costomization?.quantity
-                    existingItem.cartPrice = (existingItem?.cartPrice || 0) + costomization?.price
+                    existingItem.quantity += customization?.quantity
+                    existingItem.cartPrice = (existingItem?.cartPrice || 0) + customization?.price
 
                 } else {
                     const newCustomizationid = `c1`;
                     existingRestaurantCart.items.push({
                         ...item,
-                        quantity: costomization?.quantity,
-                        cartPrice: costomization?.price,
+                        quantity: customization?.quantity,
+                        cartPrice: customization?.price,
                         customizations: [
                             {
                                 id: newCustomizationid,
-                                ...costomization,
-                                quantity: costomization?.quantity,
-                                cartPrice: costomization?.price,
-                                price: costomization.price / costomization.quantity
+                                ...customization,
+                                quantity: customization?.quantity,
+                                cartPrice: customization?.price,
+                                price: customization.price / customization.quantity
                             }
                         ]
                     })
@@ -182,15 +182,15 @@ export const cartSlice = createSlice({
                     items: [
                         {
                             ...item,
-                            quantity: costomization?.quantity,
-                            cartPrice: costomization?.price,
+                            quantity: customization?.quantity,
+                            cartPrice: customization?.price,
                             customizations: [
                                 {
                                     id: newCustomizationid,
-                                    ...costomization,
-                                    quantity: costomization?.quantity,
-                                    cartPrice: costomization?.price,
-                                    price: costomization.price / costomization.quantity
+                                    ...customization,
+                                    quantity: customization?.quantity,
+                                    cartPrice: customization?.price,
+                                    price: customization.price / customization.quantity
                                 }
                             ]
                         }

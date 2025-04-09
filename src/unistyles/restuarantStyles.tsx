@@ -81,7 +81,7 @@ export const restaurantHeaderStyles = createStyleSheet(({ device, colors, border
         justifyContent: "space-between",
         paddingVertical: 10,
         paddingHorizontal: 5,
-        ...shadowStyle
+        // ...shadowStyle
     },
     flexRowBetween: {
         flexDirection: 'row',

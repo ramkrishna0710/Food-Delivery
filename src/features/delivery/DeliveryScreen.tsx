@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated'
 import { useSharedState } from '@features/tabs/SharedContext'
 import Graphics from '@components/home/Graphics'
-import CustomStatusBar from '@components/CustomStatusBar'
+import CustomStatusBar from '@components/statusbar/CustomStatusBar'
 import HeaderSection from '@components/home/HeaderSection'
 import MainList from '@components/list/MainList'
 import { screenWidth } from '@unistyles/Constants'
@@ -49,7 +49,8 @@ const DeliveryScreen: FC = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={'transparent'} translucent />
+      {/* <StatusBar backgroundColor={'transparent'} translucent /> */}
+      <CustomStatusBar/>
       {/* <View style={{ height: Platform.OS === 'android' ? insets.top : 0 }}> */}
       <View>
         <Animated.View style={moveUpStyle}>

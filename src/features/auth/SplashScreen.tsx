@@ -5,7 +5,7 @@ import { splashStyles } from '@unistyles/authStyles'
 import Animated, { FadeInDown } from 'react-native-reanimated'
 import CustomText from '@components/global/CustomText'
 import { resetAndNavigate } from '@utils/NavigationUtils'
-import CustomStatusBar from '@components/CustomStatusBar'
+import CustomStatusBar from '@components/statusbar/CustomStatusBar'
 
 const SplashScreen: FC = () => {
 
