@@ -53,7 +53,7 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
     useEffect(() => {
         const defaultSelectionOption: Record<string, number> = {}
         let initialPrice = item?.price || 0
-        item?.customizaionOptions?.forEach((customization: any) => {
+        item?.customizationOptions?.forEach((customization: any) => {
             if (customization?.required) {
                 const defaultOptionIndex = customization?.options?.findIndex(
                     (options: any) => options?.price === 0
@@ -82,7 +82,7 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
 
         Object.keys(selectedOption).forEach(type => {
             const optionIndex = selectedOption[type];
-            const optionPrice = item?.customizaionOptions?.find((c: any) => c.type === type)
+            const optionPrice = item?.customizationOptions?.find((c: any) => c.type === type)
                 ?.options?.[optionIndex]?.price || 0;
             customizaionPrice += optionPrice;
         })
@@ -129,7 +129,7 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
     const addItemIntoCart = async () => {
         const customizaionOptions = transformSelectedOptions(
             data?.selectedOption,
-            item?.customizaionOptions,
+            item?.customizationOptions,
         ).sort((a, b) => a.type.localeCompare(b.type))
 
         const customizedData = {
@@ -138,7 +138,7 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
             customization: {
                 quantity: data?.quantity,
                 price: data?.price,
-                customizaionOptions: customizaionOptions,
+                customiztaionOptions: customizaionOptions,
             }
         }
         dispatch(addCustomizableItem(customizedData))
