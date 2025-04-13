@@ -3,7 +3,6 @@ import React, { FC, memo, useEffect, useMemo, useRef, useState } from 'react'
 import { useStyles } from 'react-native-unistyles';
 import { searchStyles } from '@unistyles/restuarantStyles';
 import { useAppSelector } from '@states/reduxHook';
-import { selectResturantCart } from '@states/reducers/cartSlice';
 import Icon from '@components/global/Icon';
 import { Colors } from '@unistyles/Constants';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -13,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import LottieView from 'lottie-react-native';
 import { navigate } from '@utils/NavigationUtils';
 import AnimatedNumber from 'react-native-animated-numbers';
+import { selectRestaurantCart } from '@states/reducers/cartSlice';
 
 const searchItems: string[] = [
     '"chai samosa"',
@@ -33,7 +33,7 @@ const searchItems: string[] = [
 const SearchAndOffers: FC<{ item: any }> = ({ item }) => {
 
     const { styles } = useStyles(searchStyles);
-    const cart = useAppSelector(selectResturantCart(item?.id));
+    const cart = useAppSelector(selectRestaurantCart(item?.id));
     const summary = useMemo(() => {
         return cart.reduce(
             (acc, item) => {

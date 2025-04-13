@@ -9,7 +9,7 @@ import ScalePress from '@components/ui/ScalePress';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AnimatedNumbers from 'react-native-animated-numbers'
 import { useAppDispatch, useAppSelector } from '@states/reduxHook';
-import { addItemToCart, removeCustomizableItem, removeItemFromCart, selectResturantCartItem } from '@states/reducers/cartSlice';
+import { addItemToCart, removeCustomizableItem, removeItemFromCart, selectRestaurantCartItem } from '@states/reducers/cartSlice';
 import CustomModal from '@components/modal/CustomModal';
 import AddItemModal from '@components/modal/AddItemModal';
 import RepeatItemModal from '@components/modal/RepeatItemModal';
@@ -20,7 +20,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
     const { styles } = useStyles(foodStyles)
 
     const cart = useAppSelector(
-        selectResturantCartItem(resturant?.id, item?.id)
+        selectRestaurantCartItem(resturant?.id, item?.id)
     );
 
     const modalRef = useRef<any>(null);
@@ -66,7 +66,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
         } else {
             dispatch(
                 addItemToCart({
-                    resturant: resturant,
+                    restaurant: resturant,
                     item: { ...item, customizations: [] }
                 })
             )
@@ -82,7 +82,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
                 }
                 dispatch(
                     removeCustomizableItem({
-                        resturant_id: resturant?.id,
+                        restaurant_id: resturant?.id,
                         customizationId: cart?.customizations![0]?.id,
                         itemId: item?.id,
                     })
@@ -91,7 +91,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
         } else {
             dispatch(
                 removeItemFromCart({
-                    resturant_id: resturant?.id,
+                    restaurant_id: resturant?.id,
                     itemId: item?.id
                 })
             )
