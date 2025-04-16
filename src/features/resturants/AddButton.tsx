@@ -15,12 +15,12 @@ import AddItemModal from '@components/modal/AddItemModal';
 import RepeatItemModal from '@components/modal/RepeatItemModal';
 import RemoveItemModal from '@components/modal/RemoveItemModal';
 
-const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
+const AddButton: FC<{ item: any; restaurant: any }> = ({ item, restaurant }) => {
     const dispatch = useAppDispatch();
     const { styles } = useStyles(foodStyles)
 
     const cart = useAppSelector(
-        selectRestaurantCartItem(resturant?.id, item?.id)
+        selectRestaurantCartItem(restaurant?.id, item?.id)
     );
 
     const modalRef = useRef<any>(null);
@@ -30,7 +30,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
             <AddItemModal
                 item={item}
                 onClose={() => modalRef.current?.closeModal()}
-                resturant={resturant}
+                restaurant={restaurant}
             />
         )
     }
@@ -41,7 +41,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
                 item={item}
                 onOpenAddModal={openAddModal}
                 onClose={() => modalRef.current?.closeModal()}
-                restaurant={resturant}
+                restaurant={restaurant}
             />
         )
     }
@@ -51,7 +51,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
             <RemoveItemModal
                 item={item}
                 onClose={() => modalRef.current?.closeModal()}
-                restaurant={resturant}
+                restaurant={restaurant}
             />
         )
     }
@@ -66,12 +66,12 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
         } else {
             dispatch(
                 addItemToCart({
-                    restaurant: resturant,
+                    restaurant: restaurant,
                     item: { ...item, customizations: [] }
                 })
             )
         }
-    }, [dispatch, item, resturant, cart])
+    }, [dispatch, item, restaurant, cart])
 
     const removeCartHandler = useCallback(() => {
         if (item?.isCustomizable) {
@@ -82,7 +82,7 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
                 }
                 dispatch(
                     removeCustomizableItem({
-                        restaurant_id: resturant?.id,
+                        restaurant_id: restaurant?.id,
                         customizationId: cart?.customizations![0]?.id,
                         itemId: item?.id,
                     })
@@ -91,12 +91,12 @@ const AddButton: FC<{ item: any; resturant: any }> = ({ item, resturant }) => {
         } else {
             dispatch(
                 removeItemFromCart({
-                    restaurant_id: resturant?.id,
+                    restaurant_id: restaurant?.id,
                     itemId: item?.id
                 })
             )
         }
-    }, [dispatch, item, resturant, cart])
+    }, [dispatch, item, restaurant, cart])
 
     return (
         <>

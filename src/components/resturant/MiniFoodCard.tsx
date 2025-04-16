@@ -3,7 +3,7 @@ import React, { FC, memo, useEffect, useRef } from 'react'
 import { useStyles } from 'react-native-unistyles';
 import { modelStyles } from '@unistyles/modelStyles';
 import { useAppDispatch, useAppSelector } from '@states/reduxHook';
-import { addCustomizableItem, removeCustomizableItem, selectResturantCartItem } from '@states/reducers/cartSlice';
+import { addCustomizableItem, removeCustomizableItem, selectRestaurantCartItem } from '@states/reducers/cartSlice';
 import EditItemModal from './EditItemModal';
 import CustomModal from '@components/modal/CustomModal';
 import CustomText from '@components/global/CustomText';
@@ -26,7 +26,7 @@ const MiniFoodCard: FC<{
     const { styles } = useStyles(modelStyles)
     const dispatch = useAppDispatch()
     const cartItem = useAppSelector(
-        selectResturantCartItem(restaurant?.id, item?.id),
+        selectRestaurantCartItem(restaurant?.id, item?.id),
     )
     const modalRef = useRef<any>(null);
 
@@ -43,7 +43,7 @@ const MiniFoodCard: FC<{
 
     const addCartHandler = (cus: any) => {
         const data = {
-            resturant: restaurant,
+            restaurant: restaurant,
             item: item,
             customization: {
                 quantity: 1,
@@ -58,7 +58,7 @@ const MiniFoodCard: FC<{
     const removeCartHandler = (cus: any) => {
         dispatch(
             removeCustomizableItem({
-                resturant_id: restaurant?.id,
+                restaurant_id: restaurant?.id,
                 customizationId: cus?.id,
                 itemId: item?.id,
             }),

@@ -62,7 +62,8 @@ export const cardStyles = createStyleSheet(({ colors, device, border }) => ({
         borderRadius: 12,
         overflow: 'hidden',
         borderWidth: 1,
-        borderColor: colors.border
+        borderColor: colors.border,
+        width: device.width * 0.4,
     },
     centerText: {
         textAlign: 'center',

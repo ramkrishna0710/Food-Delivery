@@ -79,7 +79,7 @@ const MainList: FC = () => {
   interface ViewableItemsChangedParams {
     viewableItems: Array<ViewToken>;
     changed: Array<ViewToken>;
-  }  
+  }
 
   const onViewableItemsChanged = ({
     viewableItems,
@@ -92,9 +92,11 @@ const MainList: FC = () => {
 
   return (
     <>
+
       <Animated.View style={[styles.backToTopButton, backToTopStyle]}>
         <BackToTopButton onPress={handleScrollToTop} />
       </Animated.View>
+
       <SectionList
         overScrollMode='always'
         onScroll={handleScroll}
@@ -109,13 +111,13 @@ const MainList: FC = () => {
         stickySectionHeadersEnabled={true}
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged}
-        renderSectionHeader={({section}) => {
-          if(section.title !== 'Resturants') {
+        renderSectionHeader={({ section }) => {
+          if (section.title !== 'Resturants') {
             return null
           }
-          return(
+          return (
             <Animated.View style={[isResturantVisible || isNearEnd ? styles.shadowBottom : null]}>
-              <SoringAndFilters menuTitle="Sort" options={filtersOption}/>
+              <SoringAndFilters menuTitle="Sort" options={filtersOption} />
             </Animated.View>
           )
         }}

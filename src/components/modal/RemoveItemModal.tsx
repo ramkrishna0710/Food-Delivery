@@ -1,11 +1,11 @@
 import { View, Text, ScrollView, SafeAreaView } from 'react-native'
 import React, { FC, useEffect } from 'react'
 import { useAppSelector } from '@states/reduxHook';
-import { selectResturantCartItem } from '@states/reducers/cartSlice';
 import { useStyles } from 'react-native-unistyles';
 import { modelStyles } from '@unistyles/modelStyles';
 import CustomText from '@components/global/CustomText';
 import MiniFoodCard from '@components/resturant/MiniFoodCard';
+import { selectRestaurantCartItem } from '@states/reducers/cartSlice';
 
 const RemoveItemModal: FC<{
   item: any;
@@ -14,7 +14,7 @@ const RemoveItemModal: FC<{
 }> = ({ item, restaurant, onClose }) => {
 
   const cartItem = useAppSelector(
-    selectResturantCartItem(restaurant?.id, item?.id),
+    selectRestaurantCartItem(restaurant?.id, item?.id),
   );
 
   const { styles } = useStyles(modelStyles);

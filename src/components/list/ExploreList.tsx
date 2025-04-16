@@ -8,16 +8,21 @@ import Icon from '@components/global/Icon'
 import RecommendedList from './RecommendedList'
 import BreakerText from '@components/ui/BreakerText'
 import RegularFoodList from './RegularFoodList'
+import { useAppSelector } from '@states/reduxHook'
 
 const ExploreList = () => {
 
   const [tabSelected, setSeletedTab] = useState(1)
   const { styles } = useStyles(homeStyles)
+  const isVegMode = useAppSelector(state => state.user.isVegMode)
+
 
   return (
     <View style={styles.topHidingContainer}>
       <View style={styles.flexRowCenter}>
-        <Pressable style={styles.leftTab(tabSelected === 1)} onPress={() => setSeletedTab(1)}>
+        <Pressable style={[styles.leftTab(tabSelected === 1), {
+          borderColor: tabSelected === 1 ? isVegMode ? Colors.active : Colors.primary : Colors.border
+        }]} onPress={() => setSeletedTab(1)}>
           <CustomText
             color={tabSelected == 1 ? Colors.text : Colors.lightText}
             fontFamily='Okra-Medium'
@@ -27,12 +32,14 @@ const ExploreList = () => {
         </Pressable>
 
         <Pressable
-          style={styles.rightTab(tabSelected == 2)}
+          style={[styles.rightTab(tabSelected === 2), {
+            borderColor: tabSelected == 2 ? isVegMode ? Colors.active : Colors.primary : Colors.border
+          }]}
           onPress={() => setSeletedTab(2)}>
           <Icon
             name='bookmark-outline'
             iconFamily='Ionicons'
-            color={tabSelected == 2 ? Colors.text : Colors.lightText}
+            color={tabSelected == 2 ? isVegMode ? Colors.active : Colors.primary : Colors.lightText}
             size={14}
           />
           <CustomText
@@ -42,9 +49,9 @@ const ExploreList = () => {
         </Pressable>
       </View>
 
-      <RecommendedList/>
+      <RecommendedList />
       <BreakerText text="WHAT'S ON YOUR MIND" />
-      <RegularFoodList/>
+      <RegularFoodList />
       <BreakerText text="ALL RESTURANTS" />
     </View>
   )

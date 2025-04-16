@@ -10,6 +10,7 @@ import { Colors, screenWidth } from '@unistyles/Constants'
 import ScalePress from '@components/ui/ScalePress'
 import { DeliveryTabIcon, DiningTabIcon, LiveTabIcon, ReorderyTabIcon } from './TabIcon'
 import { useAppSelector } from '@states/reduxHook'
+import CartHOC from '@features/checkout/CartHOC'
 
 const CustomTabBar: FC<BottomTabBarProps> = props => {
     // const isVegMode = true;
@@ -45,6 +46,9 @@ const CustomTabBar: FC<BottomTabBarProps> = props => {
 
     return (
         <>
+
+            {!isLiveTabFocused && <CartHOC />}
+            
             <Animated.View
                 style={[
                     styles.tabBarContainer,

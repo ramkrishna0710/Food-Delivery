@@ -136,7 +136,7 @@ const EditItemModal: FC<{ item: any; restaurant: any; onClose: () => void; cus: 
             newCustomization: {
                 quantity: data?.quantity,
                 price: data?.price,
-                customiztaionOptions: customizaionOptions,
+                customizationOptions: customizaionOptions,
             }
         }
         dispatch(updateCustomizableItem(customizedData))

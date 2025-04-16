@@ -1,12 +1,12 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { FC, useEffect } from 'react'
 import { useAppSelector } from '@states/reduxHook';
-import { selectResturantCartItem } from '@states/reducers/cartSlice';
 import { useStyles } from 'react-native-unistyles';
 import { modelStyles } from '@unistyles/modelStyles';
 import CustomText from '@components/global/CustomText';
 import { Colors } from '@unistyles/Constants';
 import MiniFoodCard from '@components/resturant/MiniFoodCard';
+import { selectRestaurantCartItem } from '@states/reducers/cartSlice';
 
 const RepeatItemModal: FC<{
   item: any;
@@ -16,7 +16,7 @@ const RepeatItemModal: FC<{
 }> = ({ item, onOpenAddModal, restaurant, onClose: closeModal }) => {
 
   const cartItem = useAppSelector(
-    selectResturantCartItem(restaurant?.id, item?.id),
+    selectRestaurantCartItem(restaurant?.id, item?.id),
   );
 
   console.log(item);

@@ -460,6 +460,7 @@ export const cartSlice = createSlice({
             }
 
         },
+
         addCustomizableItem: (
             state,
             action: PayloadAction<{
@@ -474,8 +475,7 @@ export const cartSlice = createSlice({
         ) => {
 
             const { restaurant, item, customization } = action.payload
-
-            const existingRestaurantCart = state.carts.find(cart => cart.restaurant.id === restaurant.id);
+            const existingRestaurantCart = state.carts.find(cart => cart?.restaurant?.id === restaurant.id);
 
             if (existingRestaurantCart) {
 
@@ -547,6 +547,7 @@ export const cartSlice = createSlice({
                 })
             }
         },
+
         removeCustomizableItem: (
             state,
             action: PayloadAction<{

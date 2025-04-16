@@ -22,7 +22,7 @@ const ResturantScreen: FC = () => {
 
   const renderItem = ({ item }: any) => {
     return (
-      <FoodCard item={item} resturant={resturant} />
+      <FoodCard item={item} restaurant={resturant} />
     )
   }
 

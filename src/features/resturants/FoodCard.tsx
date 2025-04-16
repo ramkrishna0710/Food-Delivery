@@ -7,7 +7,7 @@ import Icon from '@components/global/Icon'
 import { Colors } from '@unistyles/Constants'
 import AddButton from './AddButton'
 
-const FoodCard: FC<{ item: any, resturant: any }> = ({ item, resturant }) => {
+const FoodCard: FC<{ item: any, restaurant: any }> = ({ item, restaurant }) => {
 
     const { styles } = useStyles(foodStyles)
 
@@ -47,7 +47,7 @@ const FoodCard: FC<{ item: any, resturant: any }> = ({ item, resturant }) => {
             <View style={styles.imageContainer}>
                 <View style={styles.image}>
                     <Image source={{ uri: item?.image}} style={styles.foodImage} />
-                    <AddButton item={item} resturant={resturant}/>
+                    <AddButton item={item} restaurant={restaurant}/>
                 </View>
             </View>
 

@@ -29,16 +29,15 @@ function transformSelectedOptions(
         return {
             type,
             selectedOption: customization?.options[index as number]
-        }
-    })
+        };
+    });
 }
 
-const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
+const AddItemModal: FC<{ item: any; restaurant: any; onClose: () => void }> = ({
     item,
-    resturant,
+    restaurant: restaurant,
     onClose
 }) => {
-
     const dispatch = useAppDispatch()
     const { styles } = useStyles(modelStyles)
     const [data, setData] = useState({
@@ -120,27 +119,56 @@ const AddItemModal: FC<{ item: any; resturant: any; onClose: () => void }> = ({
                 quantity: prevData?.quantity - 1,
                 price: calculatePrice(prevData?.quantity - 1, prevData?.selectedOption),
             }));
+        } else {
+            onClose();
         }
     }
+
+    // const addItemIntoCart = async () => {
+    //     const customizaionOptions = transformSelectedOptions(
+    //         data?.selectedOption,
+    //         item?.customizationOptions,
+    //     ).sort((a, b) => a.type.localeCompare(b.type))
+
+    //     const customizedData = {
+    //         restaurant: restaurant,
+    //         item: item,
+    //         customization: {
+    //             quantity: data?.quantity,
+    //             price: data?.price,
+    //             customizationOptions: customizaionOptions,
+    //         }
+    //     }
+    //     dispatch(addCustomizableItem(customizedData))
+    //     onClose()
+    // }
 
     const addItemIntoCart = async () => {
-        const customizaionOptions = transformSelectedOptions(
-            data?.selectedOption,
-            item?.customizationOptions,
-        ).sort((a, b) => a.type.localeCompare(b.type))
+        try {
+            const customizaionOptions = transformSelectedOptions(
+                data?.selectedOption,
+                item?.customizationOptions,
+            ).sort((a, b) => a.type.localeCompare(b.type));
 
-        const customizedData = {
-            resturant: resturant,
-            item: item,
-            customization: {
-                quantity: data?.quantity,
-                price: data?.price,
-                customizationOptions: customizaionOptions,
-            }
+            const customizedData = {
+                restaurant,
+                item,
+                customization: {
+                    quantity: data?.quantity,
+                    price: data?.price,
+                    customizationOptions: customizaionOptions,
+                },
+            };
+
+            console.log('Before dispatch', customizedData);
+            dispatch(addCustomizableItem(customizedData));
+            console.log('After dispatch'); // if error occurs before this, it won't print
+            onClose();
+        } catch (stack) {
+            console.log('Error while adding item to cart:', stack);
         }
-        dispatch(addCustomizableItem(customizedData))
-        onClose()
-    }
+    };
+
 
     return (
         <View>
