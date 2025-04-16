@@ -1,6 +1,6 @@
 # 🍔 FoodieX
 
-🎥 **[Watch Demo Video](https://asset.cloudinary.com/diis6gvm7/393cce69546ff41d31d6db704b0fed7e)**
+🎥 **[Watch Demo Video](https://drive.google.com/file/d/13BZSnLsttbBfy5wFUjsly0bJD2enJ6ZJ/view)**
 
 FoodieX is a modern, beautiful, and highly responsive React Native food ordering app, packed with sleek animations, persistent state management, and an intuitive user experience.
 
