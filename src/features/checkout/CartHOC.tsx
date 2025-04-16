@@ -47,7 +47,7 @@ const CartHOC: FC = () => {
             isExpand ? styles.expandedCartContainer : styles.cartContainer,
             animatedStyle,
             {
-                paddingBottom: !isExpand ? bottom.bottom + 16 : 0
+                paddingBottom: !isExpand ? bottom.bottom + 48 : 0
             }
         ]}>
             {
@@ -184,7 +184,8 @@ const CartHOC: FC = () => {
                             width: '100%',
                             height: 92,
                             zIndex: -1,
-                            bottom: -35,
+                            bottom: -20,
+                            opacity: 0.6
                         }}
                     />
                 )

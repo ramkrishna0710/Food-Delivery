@@ -19,7 +19,7 @@ const ExploreList = () => {
 
   return (
     <View style={styles.topHidingContainer}>
-      <View style={styles.flexRowCenter}>
+      <View style={[styles.flexRowCenter, {marginTop: 5}]}>
         <Pressable style={[styles.leftTab(tabSelected === 1), {
           borderColor: tabSelected === 1 ? isVegMode ? Colors.active : Colors.primary : Colors.border
         }]} onPress={() => setSeletedTab(1)}>

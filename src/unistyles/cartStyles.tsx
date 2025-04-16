@@ -12,7 +12,7 @@ export const cartStyles = createStyleSheet(({ device, colors, border }) => ({
     },
     expandedCartContainer: {
         justifyContent: 'flex-end',
-        paddingVertical: 10
+        paddingVertical: 10,
     },
     moreButton: {
         backgroundColor: colors.background,
